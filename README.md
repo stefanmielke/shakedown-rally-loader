@@ -1,6 +1,6 @@
 # Loader for [Shakedown Rally](https://nothke.itch.io/shakedown)
 
-![loader image](https://github.com/stefanmielke/shakedown-rally-loader/raw/main/screenshots%5CMainWindow.png)
+![loader image](https://github.com/stefanmielke/shakedown-rally-loader/raw/main/screenshots%5CMainWindow.png?raw=true)
 
 ### Features
 - Change Map and Car
