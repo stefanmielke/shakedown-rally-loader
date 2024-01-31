@@ -17,6 +17,12 @@
 - Click "Select Path" and find your "shakedown" folder (eg.: `G:\Games\shakedown`)
 - Click "Load Assets" to search the game folder for maps and cars
 - Select car and map you want to use
-- Click "Save Config" to save current choices
-- Click "Launch Game"
+- To run the game you have 3 options:
+  - Saving the config first and then start the game:
+    - Click "Save Config" to save current choices
+    - Click "Start"
+  - Save the config and launch at the same time:
+    - Click "Save and Start"
+  - Start the game without saving the config (but using the selected car and map):
+    - Click "Start Without Saving"
 - If you want to go back to the default car and map, click "Save Default"
