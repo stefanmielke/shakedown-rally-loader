@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             txtGamePath = new TextBox();
             folderBrowserDialog_GamePath = new FolderBrowserDialog();
@@ -40,6 +41,11 @@
             btnSaveConfig = new Button();
             btnSaveDefault = new Button();
             btnLaunchGame = new Button();
+            btnSaveAndLaunch = new Button();
+            btnStartWithoutSaving = new Button();
+            toolTipStart = new ToolTip(components);
+            toolTipSaveStart = new ToolTip(components);
+            toolTipStartWithoutSaving = new ToolTip(components);
             SuspendLayout();
             // 
             // label1
@@ -150,15 +156,37 @@
             btnLaunchGame.Name = "btnLaunchGame";
             btnLaunchGame.Size = new Size(101, 23);
             btnLaunchGame.TabIndex = 10;
-            btnLaunchGame.Text = "Launch Game";
+            btnLaunchGame.Text = "Start";
             btnLaunchGame.UseVisualStyleBackColor = true;
             btnLaunchGame.Click += btnLaunchGame_Click;
+            // 
+            // btnSaveAndLaunch
+            // 
+            btnSaveAndLaunch.Location = new Point(554, 354);
+            btnSaveAndLaunch.Name = "btnSaveAndLaunch";
+            btnSaveAndLaunch.Size = new Size(99, 23);
+            btnSaveAndLaunch.TabIndex = 11;
+            btnSaveAndLaunch.Text = "Save and Start";
+            btnSaveAndLaunch.UseVisualStyleBackColor = true;
+            btnSaveAndLaunch.Click += btnSaveAndLaunch_Click;
+            // 
+            // btnStartWithoutSaving
+            // 
+            btnStartWithoutSaving.Location = new Point(415, 354);
+            btnStartWithoutSaving.Name = "btnStartWithoutSaving";
+            btnStartWithoutSaving.Size = new Size(133, 23);
+            btnStartWithoutSaving.TabIndex = 12;
+            btnStartWithoutSaving.Text = "Start Without Saving";
+            btnStartWithoutSaving.UseVisualStyleBackColor = true;
+            btnStartWithoutSaving.Click += btnStartWithoutSaving_Click;
             // 
             // Loader
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(767, 389);
+            Controls.Add(btnStartWithoutSaving);
+            Controls.Add(btnSaveAndLaunch);
             Controls.Add(btnLaunchGame);
             Controls.Add(btnSaveDefault);
             Controls.Add(btnSaveConfig);
@@ -193,5 +221,10 @@
         private Button btnSaveConfig;
         private Button btnSaveDefault;
         private Button btnLaunchGame;
+        private Button btnSaveAndLaunch;
+        private Button btnStartWithoutSaving;
+        private ToolTip toolTipStart;
+        private ToolTip toolTipSaveStart;
+        private ToolTip toolTipStartWithoutSaving;
     }
 }

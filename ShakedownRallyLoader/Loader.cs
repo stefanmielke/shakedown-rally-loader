@@ -13,12 +13,21 @@ namespace ShakedownRallyLoader
         {
             InitializeComponent();
 
+            SetToolTips();
+
             LoadConfig();
 
             if (!string.IsNullOrWhiteSpace(txtGamePath.Text))
             {
                 LoadAssets(txtGamePath.Text);
             }
+        }
+
+        private void SetToolTips()
+        {
+            toolTipStart.SetToolTip(btnLaunchGame, "Start the game using the last saved config.");
+            toolTipSaveStart.SetToolTip(btnSaveAndLaunch, "Save the current config and start the game.");
+            toolTipStartWithoutSaving.SetToolTip(btnStartWithoutSaving, "Start the Game with the selected config but without saving.\nUses the command line options.");
         }
 
         private void LoadGameIniData()
@@ -131,21 +140,15 @@ namespace ShakedownRallyLoader
 
         private void btnSaveConfig_Click(object sender, EventArgs e)
         {
+            SaveCurrentConfig();
+        }
+
+        private void SaveCurrentConfig()
+        {
             string configPath = txtGamePath.Text + "\\config.ini";
 
-            string car, map;
-            if (listBoxCars.SelectedValue != null)
-                car = listBoxCars.SelectedValue.ToString() ?? "cars\\spec17\\spec17.car.ini";
-            else
-                return;
-
-            if (listBoxMaps.SelectedValue != null)
-                map = listBoxMaps.SelectedValue.ToString() ?? "maps\\finland\\finland.map.ini";
-            else
-                return;
-
-            car = car.Replace(txtGamePath.Text + "\\res\\", "");
-            map = map.Replace(txtGamePath.Text + "\\res\\", "");
+            string car = "", map = "";
+            GetCarAndMapSelection(ref car, ref map);
 
             var configLines = File.ReadAllLines(configPath);
             for (int i = 0; i < configLines.Length; i++)
@@ -157,6 +160,18 @@ namespace ShakedownRallyLoader
                     configLines[i] = "map = " + map;
             }
             File.WriteAllLines(configPath, configLines);
+        }
+
+        private void GetCarAndMapSelection(ref string car, ref string map)
+        {
+            if (listBoxCars.SelectedValue != null)
+                car = listBoxCars.SelectedValue.ToString() ?? "cars\\spec17\\spec17.car.ini";
+
+            if (listBoxMaps.SelectedValue != null)
+                map = listBoxMaps.SelectedValue.ToString() ?? "maps\\finland\\finland.map.ini";
+
+            car = car.Replace(txtGamePath.Text + "\\res\\", "");
+            map = map.Replace(txtGamePath.Text + "\\res\\", "");
         }
 
         private void btnSaveDefault_Click(object sender, EventArgs e)
@@ -177,8 +192,34 @@ namespace ShakedownRallyLoader
 
         private void btnLaunchGame_Click(object sender, EventArgs e)
         {
+            LaunchGame(null, null);
+        }
+
+        private void btnSaveAndLaunch_Click(object sender, EventArgs e)
+        {
+            SaveCurrentConfig();
+            LaunchGame(null, null);
+        }
+
+        private void btnStartWithoutSaving_Click(object sender, EventArgs e)
+        {
+            string car = "", map = "";
+            GetCarAndMapSelection(ref car, ref map);
+
+            LaunchGame(car, map);
+        }
+
+        private void LaunchGame(string? car, string? map)
+        {
             ProcessStartInfo startInfo = new(txtGamePath.Text + "\\NEngine-drive.exe");
             startInfo.WorkingDirectory = txtGamePath.Text;
+
+            string args = "";
+            if (!string.IsNullOrWhiteSpace(car))
+                args += "-car \"" + car + "\" ";
+            if (!string.IsNullOrWhiteSpace(map))
+                args += "-map \"" + map + "\" ";
+            startInfo.Arguments = args;
 
             Process.Start(startInfo);
         }
