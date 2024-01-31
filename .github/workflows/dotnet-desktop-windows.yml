@@ -91,4 +91,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: MSIX Package
-        path: bin/**/net8.0-windows/
+        path: ShakedownRallyLoader/bin/**/net8.0-windows/
